@@ -1,7 +1,8 @@
 <!--
   ALEPH: program website
   Brand: deep navy, Aleph gold, warm cream (matches the print flyers and deck).
-  Headings: Cormorant Garamond. Body: Crimson Pro.
+  Headings: Cormorant Garamond. Body: Crimson Pro. Labels, nav, buttons: Inter.
+  Fonts are self-hosted in ./fonts.
   Photos live in ./images. logo-gold.png is the official horizontal lockup.
   remote-work.jpg is an AI-generated illustration; swap in a real photo when you have one.
   Items marked [EDIT] need real content before launch.
@@ -22,85 +23,95 @@
 <meta property="og:url" content="https://alephexperience.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://alephexperience.com/og-image.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="preload" href="fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Self-hosted brand fonts (SIL Open Font License) */
+  @font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Cormorant Garamond"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: italic; font-display: swap; src: url("fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); }
+  @font-face { font-family: "Crimson Pro"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/crimson-pro-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Crimson Pro"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/crimson-pro-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Crimson Pro"; font-weight: 400; font-style: italic; font-display: swap; src: url("fonts/crimson-pro-latin-400-italic.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/inter-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/inter-latin-600-normal.woff2") format("woff2"); }
+
   :root {
     --navy: #0A1628;
     --navy-2: #101F38;
-    --navy-3: #14213D;
     --navy-line: #2A3A57;
     --gold: #C9A84C;
-    --gold-text: #8C6D2A;      /* gold for text on light backgrounds (contrast) */
+    --gold-hi: #D9BB63;
+    --gold-text: #7A5E22;      /* gold for text on light backgrounds (contrast) */
     --cream: #F5F0E8;
-    --cream-2: #FBF8F3;
+    --paper: #FFFFFF;
     --ink: #0A1628;
-    --ink-soft: #4A5568;
-    --ink-faint: #7A8290;
+    --ink-soft: #46505F;
+    --ink-faint: #5C6575;
     --on-dark: #F5F0E8;
-    --on-dark-soft: #CFC8BA;
+    --on-dark-soft: #B9C3D4;   /* navy-tinted, not gray */
     --line: #E3DCCF;
     --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
     --body: "Crimson Pro", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --ease: cubic-bezier(.16, 1, .3, 1);
     color-scheme: light;
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; scrollbar-color: #B9B1A2 var(--cream); }
   body {
-    margin: 0; background: var(--cream-2); color: var(--ink);
+    margin: 0; background: var(--paper); color: var(--ink);
     font-family: var(--body); font-size: 19px; line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased; caret-color: var(--gold-text);
   }
+  ::selection { background: var(--gold); color: var(--navy); }
   img { display: block; max-width: 100%; }
   h1, h2, h3 { font-family: var(--serif); font-weight: 600; margin: 0; line-height: 1.12; text-wrap: balance; }
-  p { margin: 0 0 16px; }
+  p { margin: 0 0 16px; text-wrap: pretty; }
   p:last-child { margin-bottom: 0; }
-  a { color: inherit; }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
-  h2 { font-size: clamp(38px, 4.2vw, 54px); font-weight: 500; margin-bottom: 18px; }
-  h2 i { color: var(--gold-text); font-weight: 500; }
-  .dark h2 i, .hero h1 i, .closing h2 i { color: var(--gold); }
-  .eyebrow {
-    font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: 0.28em;
-    text-transform: uppercase; color: var(--gold-text); margin-bottom: 14px;
+  h2 { font-size: clamp(40px, 4.6vw, 60px); font-weight: 500; line-height: 1.04; letter-spacing: -0.01em; margin-bottom: 20px; }
+  .accent { color: var(--gold); }
+  .label {
+    font-family: var(--sans); font-weight: 600; font-size: 12px; line-height: 1.3; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold-text);
   }
-  .dark .eyebrow { color: var(--gold); }
+  .dark .label { color: var(--gold); }
   .intro { font-size: 20px; color: var(--ink-soft); max-width: 60ch; }
   .dark .intro { color: var(--on-dark-soft); }
-  .center { text-align: center; }
-  .center .intro { margin-left: auto; margin-right: auto; }
 
   /* ---------- Buttons ---------- */
   .btn {
-    display: inline-block; font-family: var(--serif); font-size: 16px; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
-    padding: 14px 30px; border: 1px solid var(--gold); background: var(--gold); color: var(--navy);
-    transition: background .2s, color .2s, border-color .2s;
+    display: inline-block; font-family: var(--sans); font-size: 14px; font-weight: 600; line-height: 1;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    padding: 16px 28px; border: 1px solid var(--gold); background: var(--gold); color: var(--navy);
+    transition: background .2s, color .2s, border-color .2s, transform .2s var(--ease);
   }
-  .btn:hover { background: transparent; color: var(--gold); }
-  .btn.ghost { background: transparent; color: var(--on-dark); border-color: rgba(245,240,232,.7); }
+  .btn:hover { background: var(--gold-hi); border-color: var(--gold-hi); }
+  .btn:active { transform: translateY(1px); }
+  .btn.ghost { background: transparent; color: var(--on-dark); border-color: rgba(245,240,232,.55); }
   .btn.ghost:hover { background: var(--on-dark); color: var(--navy); border-color: var(--on-dark); }
   .btn.ink { background: var(--navy); border-color: var(--navy); color: var(--on-dark); }
-  .btn.ink:hover { background: transparent; color: var(--navy); }
+  .btn.ink:hover { background: var(--navy-2); border-color: var(--navy-2); }
 
   /* ---------- Nav ---------- */
   nav.top {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(10,22,40,0.96); backdrop-filter: blur(10px);
+    background: rgba(10,22,40,0.97);
     border-bottom: 1px solid var(--navy-line);
   }
   nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
   .brand { display: flex; align-items: center; text-decoration: none; }
   .brand img { height: 38px; width: auto; }
-  .navlinks { display: flex; align-items: center; gap: 30px; }
+  .navlinks { display: flex; align-items: center; gap: 28px; }
   .navlinks a:not(.btn) {
-    font-family: var(--serif); font-size: 17px; font-weight: 600; letter-spacing: 0.06em;
+    font-family: var(--sans); font-size: 14.5px; font-weight: 500;
     text-decoration: none; color: var(--on-dark-soft); transition: color .2s;
   }
-  .navlinks a:not(.btn):hover { color: var(--gold); }
-  .navlinks .btn { padding: 9px 22px; font-size: 14px; }
+  .navlinks a:not(.btn):hover { color: var(--on-dark); }
+  .navlinks .btn { padding: 11px 20px; font-size: 13px; }
   .menu-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--on-dark); }
   .menu-toggle svg { width: 26px; height: 26px; }
 
@@ -127,154 +138,145 @@
     background: linear-gradient(180deg, rgba(10,22,40,.25) 0%, rgba(10,22,40,0) 18%, rgba(10,22,40,0) 70%, var(--navy) 100%);
   }
   .hero-body { position: relative; padding-top: 8px; padding-bottom: 92px; margin-top: -40px; }
-  .hero-inner { position: relative; max-width: 760px; }
   .hero .logo { height: clamp(44px, 5vw, 64px); width: auto; margin-bottom: 26px; }
-  .hero h1 { font-size: clamp(54px, 7.6vw, 104px); font-weight: 500; line-height: 1; letter-spacing: -0.01em; }
-  .hero p.sub { font-size: clamp(21px, 2.2vw, 27px); line-height: 1.4; max-width: 34ch; margin: 22px 0 34px; color: #EDE6D8; }
-  .hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; grid-template-areas: "top video" "bottom video"; column-gap: clamp(32px, 4vw, 60px); row-gap: 0; align-items: center; }
+  .hero h1 { font-size: clamp(50px, 5.6vw, 84px); font-weight: 500; line-height: 1; letter-spacing: -0.015em; }
+  .hero h1 .accent { display: block; }
+  .hero p.sub { font-size: clamp(21px, 2.2vw, 26px); line-height: 1.4; max-width: 34ch; margin: 22px 0 30px; color: #EDE6D8; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; grid-template-areas: "top video" "bottom video"; column-gap: clamp(32px, 4vw, 60px); align-items: center; }
   .hero-top { grid-area: top; align-self: end; }
   .hero-bottom { grid-area: bottom; align-self: start; }
   .hero-grid .video { grid-area: video; }
-  .hero-top .sub { margin-bottom: 30px !important; }
-  .hero-grid .hero-inner { max-width: none; }
-  .hero-grid h1 { font-size: clamp(48px, 5.4vw, 80px); }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero .dates { margin-top: 36px; display: flex; gap: 12px 36px; flex-wrap: wrap; }
+  .hero .dates span { display: flex; flex-direction: column; gap: 6px; font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1.1; color: var(--on-dark); }
+  .hero .dates .label { color: var(--gold); }
+
+  /* One authored moment: the hero settles in on load */
+  @keyframes settle { from { opacity: 0; transform: translateY(18px); filter: blur(6px); } }
+  .hero-top > *, .hero-bottom, .hero-grid .video { animation: settle 1.1s var(--ease) both; }
+  .hero-top h1 { animation-delay: .08s; }
+  .hero-top .sub { animation-delay: .18s; }
+  .hero-grid .video { animation-delay: .26s; }
+  .hero-bottom { animation-delay: .32s; }
+
+  /* Video */
   .video {
-    position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000 center / cover no-repeat;
-    border: 1px solid rgba(201,168,76,.55); box-shadow: 0 24px 60px rgba(0,0,0,.45), 10px 10px 0 var(--gold);
-    cursor: pointer; overflow: hidden; display: block; padding: 0; color: inherit;
+    position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000;
+    box-shadow: 0 0 0 1px rgba(201,168,76,.5), 0 40px 80px -30px rgba(0,0,0,.75);
+    overflow: hidden;
   }
-  .video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-  .video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,22,40,.05), rgba(10,22,40,.45)); }
-  .video:hover img { transform: scale(1.03); }
-  .video .play {
-    position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    width: 92px; height: 92px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,.4); transition: transform .2s ease, background .2s ease;
-  }
-  .video:hover .play { transform: translate(-50%, -50%) scale(1.08); background: #D9BB63; }
-  .video .play svg { width: 34px; height: 34px; margin-left: 6px; }
-  .video .label {
-    position: absolute; z-index: 2; left: 22px; bottom: 18px; font-family: var(--serif); font-weight: 700;
-    font-size: 15px; letter-spacing: .24em; text-transform: uppercase; color: var(--on-dark);
-  }
-  .video.playing { cursor: auto; }
-  .video.playing::after { display: none; }
   .video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
   .video.playing video { object-fit: contain; }
   .video .cover { position: absolute; inset: 0; z-index: 3; border: 0; padding: 0; margin: 0; background: none; cursor: pointer; display: block; width: 100%; height: 100%; color: inherit; }
-  .video .cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,22,40,.05), rgba(10,22,40,.45)); }
+  .video .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .video .cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,22,40,0) 40%, rgba(10,22,40,.6)); }
   .video:hover .cover img { transform: scale(1.03); }
-  .video:hover .cover .play { transform: translate(-50%, -50%) scale(1.08); background: #D9BB63; }
-  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
-  .hero .dates {
-    margin-top: 40px; display: flex; gap: 14px 34px; flex-wrap: wrap;
-    font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: 0.08em; color: var(--on-dark);
+  .video .play {
+    position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 88px; height: 88px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 30px -6px rgba(0,0,0,.5); transition: transform .3s var(--ease), background .2s;
   }
-  .hero .dates span b { color: var(--gold); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; font-size: 14px; margin-right: 10px; }
+  .video:hover .play { transform: translate(-50%, -50%) scale(1.07); background: var(--gold-hi); }
+  .video .play svg { width: 32px; height: 32px; margin-left: 5px; }
+  .video .cover .label { position: absolute; z-index: 2; left: 22px; bottom: 20px; color: var(--on-dark); }
 
   /* ---------- Sections ---------- */
-  section { padding: clamp(76px, 9vw, 120px) 0; }
+  section { padding: clamp(80px, 10vw, 132px) 0; }
   section.cream { background: var(--cream); }
   section.dark { background: var(--navy); color: var(--on-dark); }
-  section.dark-2 { background: var(--navy-3); color: var(--on-dark); }
+  .section-head { max-width: 760px; margin-bottom: 52px; }
 
   /* About */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 88px); align-items: center; }
   .about-grid p { color: var(--ink-soft); }
   .about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .about-photos img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
-  .about-photos img:first-child { margin-top: 40px; }
+  .about-photos img:first-child { margin-top: 48px; }
 
-  /* Stats */
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 64px; border-top: 1px solid var(--line); }
-  .stat { padding: 30px 28px 0; border-left: 1px solid var(--line); }
-  .stat:first-child { border-left: 0; padding-left: 0; }
-  .stat .num { font-family: var(--serif); font-size: clamp(54px, 6vw, 76px); font-weight: 500; line-height: 1; color: var(--navy); }
-  .stat .num small { font-size: .5em; color: var(--gold-text); }
-  .stat p { margin-top: 10px; font-size: 18px; color: var(--ink-soft); }
-  .stats-note { margin-top: 22px; font-size: 16px; color: var(--ink-faint); font-style: italic; }
-
-  /* Pillars */
-  .section-head { max-width: 700px; margin: 0 auto 48px; }
-  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .pillar { background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; }
-  .pillar img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-  .pillar .body { padding: 22px 22px 26px; border-top: 3px solid var(--gold); }
-  .pillar h3 { font-size: 30px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
-  .pillar h3 small { font-family: var(--body); font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--ink-faint); font-weight: 400; font-style: italic; margin-left: 6px; }
-  .pillar p { font-size: 17.5px; color: var(--ink-soft); }
-  .pillar .list { margin-top: 12px; font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--gold-text); line-height: 1.45; }
+  /* Pillars: photo-led, staggered, no card chrome */
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; align-items: start; }
+  .pillar:nth-child(even) { margin-top: 64px; }
+  .pillar img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .pillar .body { padding-top: 20px; }
+  .pillar h3 { font-size: 36px; font-weight: 600; line-height: 1; margin-bottom: 10px; display: flex; align-items: baseline; gap: 12px; }
+  .pillar p { font-size: 18px; color: var(--ink-soft); margin-bottom: 12px; }
+  .pillar .list { font-family: var(--sans); font-size: 13px; font-weight: 500; line-height: 1.6; color: var(--gold-text); }
 
   /* Testimonials */
-  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-  .quote { background: var(--navy-2); border: 1px solid var(--navy-line); padding: 32px 30px 30px; display: flex; flex-direction: column; }
-  .quote img { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin-bottom: 22px; }
-  .quote blockquote { margin: 0 0 22px; font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.32; color: var(--on-dark); flex: 1; }
-  .who { font-size: 17px; color: var(--on-dark-soft); line-height: 1.4; }
-  .who b { display: block; color: var(--on-dark); font-weight: 600; font-size: 18.5px; }
-  .rabbi-head { margin-top: 72px; }
-  .rabbis { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
-  .rabbi { display: grid; grid-template-columns: 120px 1fr; gap: 26px; align-items: start; border-top: 1px solid var(--navy-line); padding-top: 30px; }
-  .rabbi img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
-  .rabbi blockquote { margin: 0 0 18px; font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.38; color: var(--on-dark); }
-  .rabbi blockquote p { margin-bottom: 12px; }
+  .quotes { display: grid; grid-template-columns: 1.3fr 1fr; gap: 0 72px; }
+  .quote { margin: 0; }
+  .quote blockquote { margin: 0 0 22px; font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1.3; color: var(--on-dark); }
+  .quote.lead { grid-row: span 2; }
+  .quote.lead blockquote { font-size: clamp(32px, 3.3vw, 44px); line-height: 1.16; letter-spacing: -0.005em; margin-bottom: 30px; }
+  .quote:not(.lead) { padding: 30px 0; border-top: 1px solid var(--navy-line); }
+  .quote:not(.lead):nth-child(2) { padding-top: 0; border-top: 0; }
+  .who { display: flex; align-items: center; gap: 16px; font-family: var(--sans); font-size: 14px; line-height: 1.45; color: var(--on-dark-soft); }
+  .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 1px rgba(245,240,232,.18); }
+  .lead .who img { width: 76px; height: 76px; }
+  .who b { display: block; color: var(--on-dark); font-weight: 600; font-size: 15px; }
+  .rabbi-head { margin-top: 96px; padding-top: 48px; border-top: 1px solid var(--navy-line); font-size: clamp(30px, 3vw, 38px); font-weight: 500; }
+  .rabbis { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 56px; margin-top: 32px; }
+  .rabbi { margin: 0; display: grid; grid-template-columns: 104px 1fr; gap: 26px; align-items: start; }
+  .rabbi > img { width: 104px; height: 104px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(245,240,232,.18); }
+  .rabbi blockquote { margin: 0 0 18px; font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.4; color: var(--on-dark); }
+  .rabbi .who { display: block; }
 
   /* Curriculum */
-  .curriculum-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; margin-top: 48px; }
-  .course { padding: 24px 0; border-top: 1px solid var(--line); }
+  .curriculum-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+  .course { padding: 26px 0; border-top: 1px solid var(--line); }
   .course:first-child { border-top: 0; padding-top: 0; }
-  .course h3 { font-size: 28px; margin-bottom: 6px; }
-  .course h3 span { font-family: var(--body); font-weight: 400; font-style: italic; font-size: 17px; color: var(--ink-faint); margin-left: 6px; }
+  .course h3 { font-size: 30px; margin-bottom: 6px; }
+  .course h3 .label { display: block; margin-top: 6px; letter-spacing: 0.08em; }
   .course p { color: var(--ink-soft); }
   .topics { margin-top: 10px; font-size: 17px; color: var(--ink-soft); }
   .topics b { color: var(--ink); font-weight: 600; }
   .schedule { background: var(--navy); color: var(--on-dark); padding: 34px 32px; position: sticky; top: 100px; }
-  .schedule h3 { font-size: 28px; margin-bottom: 16px; }
+  .schedule h3 { font-size: 30px; margin-bottom: 16px; }
   .schedule table { width: 100%; border-collapse: collapse; }
-  .schedule td { padding: 10px 0; border-top: 1px solid var(--navy-line); font-size: 17.5px; vertical-align: top; }
-  .schedule td.t { width: 66px; color: var(--gold); font-variant-numeric: tabular-nums; font-weight: 600; font-size: 16px; padding-top: 11px; }
+  .schedule td { padding: 10px 0; border-top: 1px solid var(--navy-line); font-size: 18px; line-height: 1.35; vertical-align: top; }
+  .schedule td.t { width: 64px; font-family: var(--sans); color: var(--gold); font-variant-numeric: tabular-nums; font-weight: 600; font-size: 13.5px; padding-top: 12px; }
   .schedule td i { color: var(--on-dark-soft); font-size: 16px; }
 
   /* Speakers */
-  .speakers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 44px; }
-  .speaker-group h3 { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .speakers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .speaker-group h3 { padding-bottom: 12px; margin-bottom: 10px; border-bottom: 1px solid #D9D0BF; }
   .speaker-group ul { list-style: none; padding: 0; margin: 0; }
-  .speaker-group li { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.35; padding: 4px 0; }
+  .speaker-group li { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.3; padding: 5px 0; }
 
   /* Programs */
-  .programs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+  .programs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
   .prog { background: var(--navy-2); border: 1px solid var(--navy-line); display: flex; flex-direction: column; }
   .prog > img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-  .prog .body { padding: 34px 34px 36px; display: flex; flex-direction: column; flex: 1; border-top: 3px solid var(--gold); }
-  .prog .tag { font-family: var(--serif); font-weight: 700; font-size: 14px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); }
-  .prog h3 { font-size: clamp(34px, 3.4vw, 44px); font-weight: 500; margin: 8px 0 6px; }
-  .prog .when { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--gold); margin-bottom: 16px; }
+  .prog .body { padding: 32px 34px 36px; display: flex; flex-direction: column; flex: 1; }
+  .prog h3 { font-size: clamp(36px, 3.4vw, 46px); font-weight: 500; line-height: 1.05; margin: 0 0 8px; }
+  .prog .when { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: var(--gold); margin-bottom: 18px; }
   .prog p { color: var(--on-dark-soft); }
-  .prog ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
-  .prog li { font-family: var(--serif); font-size: 18.5px; font-weight: 600; padding-left: 16px; position: relative; line-height: 1.35; }
-  .prog li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
-  .prog .foot-row { margin-top: auto; padding-top: 30px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .prog ul { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
+  .prog li { font-family: var(--serif); font-size: 19px; font-weight: 600; padding-left: 20px; position: relative; line-height: 1.35; }
+  .prog li::before { content: ""; position: absolute; left: 0; top: .7em; width: 10px; height: 1.5px; background: var(--gold); }
+  .prog li .opt { font-family: var(--body); font-weight: 400; color: var(--on-dark-soft); }
+  .prog .foot-row { margin-top: auto; padding-top: 32px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
   .price { font-family: var(--serif); font-size: 64px; font-weight: 500; line-height: 1; }
-  .price small { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-  .combo { margin-top: 36px; text-align: center; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--on-dark-soft); }
-  .combo b { color: var(--gold); font-style: normal; font-weight: 600; }
+  .price .label { display: block; margin-bottom: 10px; }
+  .combo { margin-top: 32px; max-width: 64ch; font-size: 20px; color: var(--on-dark-soft); }
+  .combo b { color: var(--on-dark); font-weight: 600; }
 
-  .summer { margin-top: 56px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; border: 1px solid var(--navy-line); background: var(--navy-2); }
-  .summer > div { padding: 30px 32px; }
-  .summer-item { border-left: 1px solid var(--navy-line); }
-  .summer h3 { font-size: 34px; font-weight: 500; margin: 2px 0 8px; }
+  .summer { margin-top: 64px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; border-top: 1px solid var(--navy-line); }
+  .summer > div { padding: 32px 32px 0 0; }
+  .summer-item { padding-left: 32px !important; border-left: 1px solid var(--navy-line); }
+  .summer h3 { font-size: 38px; font-weight: 500; margin: 0 0 8px; }
   .summer p { color: var(--on-dark-soft); font-size: 18px; margin: 0; }
   .summer a { color: var(--gold); }
-  .summer .tag { font-family: var(--serif); font-weight: 700; font-size: 14px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
-  .summer .len { font-family: var(--serif); font-size: 40px; font-weight: 500; line-height: 1.1; margin: 6px 0 6px; }
+  .summer .len { font-family: var(--serif); font-size: 42px; font-weight: 500; line-height: 1.1; margin: 8px 0 4px; }
 
   /* Steps */
-  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; margin-top: 48px; }
-  .step { border-top: 2px solid var(--gold); padding-top: 20px; }
-  .step .n { font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 6px; }
-  .step h3 { font-size: 27px; margin-bottom: 8px; }
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; counter-reset: step; }
+  .step { border-top: 1px solid #D9D0BF; padding-top: 18px; }
+  .step .label { margin-bottom: 10px; }
+  .step h3 { font-size: 28px; line-height: 1.08; margin-bottom: 8px; }
   .step p { font-size: 17.5px; color: var(--ink-soft); }
+  .apply-cta { margin-top: 52px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .apply-cta p { margin: 0; font-size: 18px; color: var(--ink-soft); }
 
   /* FAQ */
   .faq-grid { display: grid; grid-template-columns: 1fr 1.7fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
@@ -283,30 +285,34 @@
   details { border-top: 1px solid var(--line); }
   details:last-child { border-bottom: 1px solid var(--line); }
   summary {
-    list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative;
-    font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.3;
+    list-style: none; cursor: pointer; padding: 22px 44px 22px 0; position: relative;
+    font-family: var(--serif); font-size: 25px; font-weight: 600; line-height: 1.3; transition: color .2s;
   }
+  summary:hover { color: var(--gold-text); }
   summary::-webkit-details-marker { display: none; }
   summary::after {
-    content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
-    font-family: var(--body); font-weight: 400; font-size: 28px; color: var(--gold-text); transition: transform .2s;
+    content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px;
+    background:
+      linear-gradient(var(--gold-text), var(--gold-text)) center / 14px 1.5px no-repeat,
+      linear-gradient(var(--gold-text), var(--gold-text)) center / 1.5px 14px no-repeat;
+    transition: transform .35s var(--ease);
   }
-  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
-  details .answer { padding: 0 40px 22px 0; color: var(--ink-soft); }
+  details[open] summary::after { transform: rotate(45deg); }
+  details .answer { padding: 0 44px 24px 0; color: var(--ink-soft); max-width: 62ch; }
   details .answer a { color: var(--gold-text); }
 
   /* Closing banner */
   .closing {
-    text-align: center; color: var(--on-dark);
+    color: var(--on-dark);
     background:
-      linear-gradient(rgba(10,22,40,.74), rgba(10,22,40,.82)),
+      linear-gradient(90deg, rgba(10,22,40,.92) 0%, rgba(10,22,40,.78) 55%, rgba(10,22,40,.6) 100%),
       url("images/kotel.jpg") center 60% / cover no-repeat;
     background-color: var(--navy);
   }
-  .closing h2 { max-width: 22ch; margin: 0 auto 18px; }
-  .closing p { color: #E6DFD0; max-width: 50ch; margin: 0 auto 34px; }
-  .closing .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .closing .contact { margin-top: 44px; font-size: 18px; color: var(--on-dark-soft); }
+  .closing h2 { font-size: clamp(48px, 6vw, 80px); max-width: 14ch; margin: 0 0 18px; }
+  .closing p { color: #E6DFD0; max-width: 46ch; margin: 0 0 34px; font-size: 21px; }
+  .closing .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .closing .contact { margin-top: 44px; font-family: var(--sans); font-size: 14.5px; color: var(--on-dark-soft); }
   .closing .contact a { color: var(--on-dark); text-decoration: none; font-weight: 600; }
   .closing .contact a:hover { text-decoration: underline; }
 
@@ -314,35 +320,34 @@
   footer { background: var(--navy); color: var(--on-dark-soft); border-top: 1px solid var(--navy-line); padding: 44px 0 32px; }
   .foot { display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; }
   .foot .brand img { height: 34px; }
-  .foot nav { display: flex; gap: 26px; flex-wrap: wrap; }
-  .foot nav a { font-family: var(--serif); font-size: 17px; font-weight: 600; text-decoration: none; color: var(--on-dark-soft); }
-  .foot nav a:hover { color: var(--gold); }
-  .copyright { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--navy-line); font-size: 15px; color: #9AA3B5; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .foot nav { display: flex; gap: 24px; flex-wrap: wrap; }
+  .foot nav a { font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; color: var(--on-dark-soft); }
+  .foot nav a:hover { color: var(--on-dark); }
+  .copyright { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--navy-line); font-family: var(--sans); font-size: 13px; color: #9AA6BA; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
-  /* Fade in on scroll */
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.is-visible { opacity: 1; transform: none; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
   .about-grid > *, .curriculum-grid > *, .faq-grid > *, .programs > *, .quotes > *, .rabbis > *,
-  .pillars > *, .speakers > *, .steps > *, .stats > *, .about-photos > * { min-width: 0; }
+  .pillars > *, .speakers > *, .steps > *, .about-photos > * { min-width: 0; }
 
   /* ---------- Responsive ---------- */
   @media (max-width: 1020px) {
     .hero-grid { grid-template-columns: 1fr; grid-template-areas: "top" "video" "bottom"; }
     .hero-grid .video { margin: 0 0 36px; }
-    .hero-body { padding-bottom: 64px !important; }
-    .pillars, .speakers { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
+    .hero-body { padding-bottom: 64px; }
+    .pillars, .speakers { grid-template-columns: repeat(2, 1fr); gap: 44px 24px; }
     .steps { grid-template-columns: repeat(3, 1fr); gap: 40px 24px; }
     .quotes { grid-template-columns: 1fr; }
+    .quote.lead { grid-row: auto; padding-bottom: 36px; }
+    .quote:not(.lead):nth-child(2) { padding-top: 30px; border-top: 1px solid var(--navy-line); }
     .rabbis, .programs { grid-template-columns: 1fr; }
     .summer { grid-template-columns: 1fr 1fr; }
-    .summer-head { grid-column: 1 / -1; border-bottom: 1px solid var(--navy-line); }
-    .summer-item:nth-child(2) { border-left: 0; }
+    .summer-head { grid-column: 1 / -1; padding-bottom: 28px !important; }
+    .summer-item:nth-child(2) { border-left: 0; padding-left: 0 !important; }
     .curriculum-grid { grid-template-columns: 1fr; }
     .schedule { position: static; }
   }
@@ -354,24 +359,26 @@
       background: var(--navy); border-bottom: 1px solid var(--navy-line);
     }
     .navlinks.open { display: flex; }
-    .navlinks a:not(.btn) { padding: 14px 0; width: 100%; border-bottom: 1px solid var(--navy-line); }
+    .navlinks a:not(.btn) { padding: 14px 0; width: 100%; border-bottom: 1px solid var(--navy-line); font-size: 16px; }
     .navlinks .btn { margin-top: 20px; }
     .about-grid, .faq-grid { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: 1fr; }
-    .stat { border-left: 0; padding-left: 0; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
     .hero-body { margin-top: -20px; padding-bottom: 72px; }
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 16px; }
     .navlinks { padding: 8px 16px 24px; }
     .pillars, .speakers, .steps { grid-template-columns: 1fr; }
+    .pillar:nth-child(even) { margin-top: 0; }
+    .pillar img { aspect-ratio: 4 / 3; }
     .summer { grid-template-columns: 1fr; }
-    .summer-item { border-left: 0; border-top: 1px solid var(--navy-line); }
+    .summer-item { border-left: 0; padding-left: 0 !important; border-top: 1px solid var(--navy-line); padding-top: 24px !important; margin-top: 24px; }
     .prog ul { grid-template-columns: 1fr; }
-    .prog .body, .quote { padding: 26px 22px; }
-    .rabbi { grid-template-columns: 1fr; }
+    .prog .body { padding: 26px 22px; }
+    .rabbi { grid-template-columns: 1fr; gap: 18px; }
+    .rabbi > img { width: 80px; height: 80px; }
     .schedule { padding: 24px 18px; }
     .about-photos img:first-child { margin-top: 24px; }
+    .quote.lead blockquote { font-size: 30px; }
   }
 </style>
 </head>
@@ -402,7 +409,7 @@
   <div class="wrap hero-body hero-grid">
     <div class="hero-inner hero-top">
       <img class="logo" src="images/logo-gold.png" alt="Aleph" width="280" height="76">
-      <h1>Real Depth. <i>Real Learning.</i></h1>
+      <h1>Real Depth. <span class="accent">Real Learning.</span></h1>
       <p class="sub">An immersive Yeshiva experience in Jerusalem for serious young men who want more than just another trip.</p>
     </div>
     <div class="hero-bottom">
@@ -411,8 +418,8 @@
         <a class="btn ghost" href="#dates">See Programs</a>
       </div>
       <div class="dates">
-        <span><b>Yeshiva Experience</b>Dec 20 &ndash; Jan 3</span>
-        <span><b>Remote Work Study</b>Jan 4 &ndash; 31</span>
+        <span><b class="label">Yeshiva Experience</b>Dec 20 &ndash; Jan 3</span>
+        <span><b class="label">Remote Work Study</b>Jan 4 &ndash; 31</span>
       </div>
     </div>
     <div class="video" id="aleph-video">
@@ -420,7 +427,7 @@
       <button class="cover" aria-label="Play the Aleph video">
         <img src="images/video-poster.jpg" alt="" loading="eager">
         <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#0A1628"><path d="M6 4l15 8-15 8z"/></svg></span>
-        <span class="label">Watch the video</span>
+        <span class="label">Watch the video &middot; 3 min</span>
       </button>
     </div>
   </div>
@@ -429,13 +436,12 @@
 <section id="about">
   <div class="wrap">
     <div class="about-grid">
-      <div class="reveal">
-        <div class="eyebrow">About Aleph</div>
-        <h2>More than <i>another trip</i></h2>
+      <div>
+        <h2>More than another trip</h2>
         <p>Aleph brings young men to Jerusalem for a few focused weeks of Torah learning, personal growth, and travel around Israel.</p>
         <p>Mornings are spent learning Gemara in small groups, followed by Ta&rsquo;amei HaMitzvos, the meaning behind the mitzvos. Afternoons bring Chumash with Rashi, workshops on career, relationships, and purpose, time with rabbis and mentors, and trips, hikes, and sports.</p>
       </div>
-      <div class="about-photos reveal">
+      <div class="about-photos">
         <img src="images/study.jpg" alt="A student in glasses listening closely during a class" style="object-position: center 35%;">
         <img src="images/water.jpg" alt="The group having fun together at the Kineret">
       </div>
@@ -446,12 +452,11 @@
 
 <section class="cream" id="program">
   <div class="wrap">
-    <div class="section-head center reveal">
-      <div class="eyebrow">The Program</div>
-      <h2>Four Pillars. <i>One Experience.</i></h2>
+    <div class="section-head">
+      <h2>Four Pillars. One Experience.</h2>
     </div>
     <div class="pillars">
-      <article class="pillar reveal">
+      <article class="pillar">
         <img src="images/classroom.jpg" alt="Students learning together around a table with a rabbi at the whiteboard" style="object-position: center 40%;">
         <div class="body">
           <h3>Learn</h3>
@@ -459,7 +464,7 @@
           <div class="list">Talmud · Chumash · Jewish Law · Prayer</div>
         </div>
       </article>
-      <article class="pillar reveal">
+      <article class="pillar">
         <img src="images/kotel.jpg" alt="Students learning together in a circle at the Kotel at night" style="object-position: center 60%;">
         <div class="body">
           <h3>Grow</h3>
@@ -467,7 +472,7 @@
           <div class="list">Mussar · Mentorship · Self-Awareness · Purpose</div>
         </div>
       </article>
-      <article class="pillar reveal">
+      <article class="pillar">
         <img src="images/hike.jpg" alt="Students standing together on a mountain overlook above the Judean hills" style="object-position: center 55%;">
         <div class="body">
           <h3>Explore</h3>
@@ -475,10 +480,10 @@
           <div class="list">Jerusalem · Kotel · Kineret · Yeshivas</div>
         </div>
       </article>
-      <article class="pillar reveal">
+      <article class="pillar">
         <img src="images/climb.jpg" alt="Students climbing at an indoor rock wall">
         <div class="body">
-          <h3>Train <small>optional</small></h3>
+          <h3>Train <span class="label">Optional</span></h3>
           <p>Climb, hike, play, and challenge your body alongside your mind.</p>
           <div class="list">Climbing · Hiking · Fitness · Sports</div>
         </div>
@@ -489,33 +494,27 @@
 
 <section class="dark" id="voices">
   <div class="wrap">
-    <div class="center reveal">
-      <div class="eyebrow">In Their Words</div>
-      <h2>What our students <i>say</i></h2>
+    <div class="section-head">
+      <h2>From the guys who came</h2>
     </div>
     <div class="quotes">
-      <figure class="quote reveal" style="margin:0">
-        <img src="images/t-chris.jpg" alt="Chris Stockwell with a rabbi">
+      <figure class="quote lead">
         <blockquote>&ldquo;When I boarded the plane back to the States, I was leaving Israel with real emunah. It was on this trip that I started actually believing in Hashem and praying to Him with my whole heart.&rdquo;</blockquote>
-        <figcaption class="who"><b>Chris Stockwell</b>Founder of Scout Travel Inc</figcaption>
+        <figcaption class="who"><img src="images/t-chris.jpg" alt="Chris Stockwell with a rabbi"><span><b>Chris Stockwell</b>Founder of Scout Travel Inc</span></figcaption>
       </figure>
-      <figure class="quote reveal" style="margin:0">
-        <img src="images/t-jordan.jpg" alt="Jordan Berger">
+      <figure class="quote">
         <blockquote>&ldquo;Aleph fundamentally redefined my understanding of what it means to be Jewish.&rdquo;</blockquote>
-        <figcaption class="who"><b>Jordan Berger</b>Cornell Grad &amp; Managing Partner at Sundara Partners</figcaption>
+        <figcaption class="who"><img src="images/t-jordan.jpg" alt="Jordan Berger"><span><b>Jordan Berger</b>Cornell Grad &amp; Managing Partner at Sundara Partners</span></figcaption>
       </figure>
-      <figure class="quote reveal" style="margin:0">
-        <img src="images/t-mitch.jpg" alt="Mitch Rosenthal">
+      <figure class="quote">
         <blockquote>&ldquo;Everyone loved being part of Aleph. Rabbi Avi and Rabbi Jimmy created an awesome group dynamic and allowed us to learn in a comfortable and challenging way.&rdquo;</blockquote>
-        <figcaption class="who"><b>Mitch Rosenthal</b>Senior at Columbia University</figcaption>
+        <figcaption class="who"><img src="images/t-mitch.jpg" alt="Mitch Rosenthal"><span><b>Mitch Rosenthal</b>Senior at Columbia University</span></figcaption>
       </figure>
     </div>
 
-    <div class="rabbi-head reveal">
-      <div class="eyebrow">From the Rabbis</div>
-    </div>
+    <h3 class="rabbi-head">From the rabbis</h3>
     <div class="rabbis">
-      <figure class="rabbi reveal" style="margin:0">
+      <figure class="rabbi">
         <img src="images/t-horwitz.jpg" alt="Rabbi Zach Horwitz">
         <div>
           <blockquote>
@@ -524,7 +523,7 @@
           <figcaption class="who"><b>Rabbi Zach Horwitz</b>Meor Columbia</figcaption>
         </div>
       </figure>
-      <figure class="rabbi reveal" style="margin:0">
+      <figure class="rabbi">
         <img src="images/t-wallach.jpg" alt="Rabbi Kenny Wallach">
         <div>
           <blockquote><p>&ldquo;Aleph offered an amazing diversity of thought provoking educational experiences and creative personal growth activities. The experience lasted with my students far beyond the length of the program. I would recommend this to any mkarev who has students who are ready and willing to transition into a more engaged relationship with their Judaism.&rdquo;</p></blockquote>
@@ -537,40 +536,39 @@
 
 <section id="curriculum">
   <div class="wrap">
-    <div class="reveal">
-      <div class="eyebrow">Curriculum</div>
-      <h2>What you&rsquo;ll <i>learn</i></h2>
+    <div class="section-head">
+      <h2>What you&rsquo;ll learn</h2>
     </div>
     <div class="curriculum-grid">
       <div>
-        <div class="course reveal">
+        <div class="course">
           <h3>Gemara Learning</h3>
           <p>Practical, guided skill-building that teaches you to follow the structure and flow of the Talmud. Small groups keep every session personal and give you room to participate and own the material.</p>
         </div>
-        <div class="course reveal">
+        <div class="course">
           <h3>Studies in Bereishis</h3>
           <p>Learn to read Genesis the way the great commentators did, using a four-step method that builds real text skills and gives practical lessons for how to live.</p>
         </div>
-        <div class="course reveal">
-          <h3>The Jewish Perspective <span>with Rabbi Gershenfeld</span></h3>
+        <div class="course">
+          <h3>The Jewish Perspective <span class="label">with Rabbi Gershenfeld</span></h3>
           <p>A weekly class that takes ideas you thought you already understood and looks at them in a new way, giving you a bigger picture of what your life can be and what Judaism asks of you.</p>
         </div>
-        <div class="course reveal">
+        <div class="course">
           <h3>Jewish Law &amp; Its Meaning</h3>
           <p>Learn the practical halachos, and the reasons behind why we do what we do.</p>
           <p class="topics"><b>Topics include:</b> Tzitzis · Tefillin · Tzedakah · Shabbos · Kiddush · Blessings · Torah Study · Holidays</p>
         </div>
-        <div class="course reveal">
+        <div class="course">
           <h3>Personal Growth &amp; Reflection</h3>
           <p>Study of classic works on character and self-improvement, along with daily reflection in a personal journal you receive at the start of the program.</p>
         </div>
-        <div class="course reveal">
+        <div class="course">
           <h3>Guest Speakers &amp; Evening Q&amp;A</h3>
           <p>Speakers on Jewish philosophy, self-development, and business join for talks and open Q&amp;A.</p>
         </div>
       </div>
-      <aside class="schedule reveal" aria-label="Sample daily schedule">
-        <h3>Sample Daily Schedule</h3>
+      <aside class="schedule" aria-label="Sample daily schedule">
+        <h3>Sample daily schedule</h3>
         <table>
           <tr><td class="t">8:45</td><td>Beginner Tefilla Class</td></tr>
           <tr><td class="t">9:00</td><td>Tefilla <i>(Optional)</i></td></tr>
@@ -591,26 +589,25 @@
 
 <section class="cream" id="speakers">
   <div class="wrap">
-    <div class="reveal">
-      <div class="eyebrow">Guest Speakers</div>
-      <h2>Learn from <i>the best</i></h2>
-      <p class="intro">Recent speakers include:</p>
+    <div class="section-head">
+      <h2>Who you&rsquo;ll hear from</h2>
+      <p class="intro">Recent guest speakers include:</p>
     </div>
     <div class="speakers">
-      <div class="speaker-group reveal">
-        <h3>Jewish Philosophy</h3>
+      <div class="speaker-group">
+        <h3 class="label">Jewish Philosophy</h3>
         <ul><li>Rabbi Yitzchok Berkovits</li><li>Rabbi Yaakov Marcus</li><li>Rabbi MZ Dubov</li></ul>
       </div>
-      <div class="speaker-group reveal">
-        <h3>Self Development</h3>
+      <div class="speaker-group">
+        <h3 class="label">Self Development</h3>
         <ul><li>Rabbi Dr. Yosef Lynn</li><li>Rabbi Yehoshua Styne</li><li>Rabbi AY Jacobs</li></ul>
       </div>
-      <div class="speaker-group reveal">
-        <h3>Business Leadership</h3>
+      <div class="speaker-group">
+        <h3 class="label">Business Leadership</h3>
         <ul><li>Tom Steinberg</li><li>Charles Maslin</li><li>Ari Wasserman</li></ul>
       </div>
-      <div class="speaker-group reveal">
-        <h3>Gemara in Depth</h3>
+      <div class="speaker-group">
+        <h3 class="label">Gemara in Depth</h3>
         <ul><li>Rabbi Immanuel Bernstein</li><li>Rabbi Yosef Hershman</li></ul>
       </div>
     </div>
@@ -619,17 +616,15 @@
 
 <section class="dark" id="dates">
   <div class="wrap">
-    <div class="center reveal">
-      <div class="eyebrow">Winter 2026&ndash;27</div>
-      <h2>Two programs. <i>One Jerusalem.</i></h2>
-      <p class="intro">Space in each program is limited. Applications are reviewed on a rolling basis.</p>
+    <div class="section-head">
+      <h2>Two programs. <span class="accent">One Jerusalem.</span></h2>
+      <p class="intro">Winter 2026&ndash;27. Space in each program is limited, and applications are reviewed on a rolling basis.</p>
     </div>
 
     <div class="programs">
-      <article class="prog reveal">
+      <article class="prog">
         <img src="images/classroom.jpg" alt="Students learning together around a table in Jerusalem" style="object-position: center 40%;">
         <div class="body">
-          <div class="tag">Program One</div>
           <h3>Yeshiva Experience</h3>
           <div class="when">December 20 &ndash; January 3</div>
           <p>Two immersive weeks of real learning, mentorship, and adventure in Jerusalem.</p>
@@ -639,26 +634,25 @@
             <li>Mussar &amp; Mentorship</li>
             <li>Kotel &amp; Kineret</li>
             <li>Guest Speakers</li>
-            <li>Fitness <span style="font-weight:400;font-style:italic">(optional)</span></li>
+            <li>Fitness <span class="opt">(optional)</span></li>
           </ul>
           <div class="foot-row">
-            <div class="price"><small>Program price</small>$299</div>
+            <div class="price"><span class="label">Program price</span>$299</div>
             <a class="btn apply-link" href="#apply">Apply</a>
           </div>
         </div>
       </article>
 
-      <article class="prog reveal">
+      <article class="prog">
         <img src="images/remote-work.jpg" alt="A student studying Gemara at a laptop by a window overlooking Jerusalem at sunset" style="object-position: 20% center;">
         <div class="body">
-          <div class="tag">Program Two</div>
           <h3>Remote Work Study</h3>
           <div class="when">January 4 &ndash; 31 &middot; Up to 4 weeks</div>
           <p>Learn Deeply. Build Boldly. Work remotely from Jerusalem while you grow in your Judaism.</p>
           <ul>
             <li>Subsidized Living</li>
             <li>Co-Working Space</li>
-            <li>World-Class Mentors</li>
+            <li>Business Mentors</li>
             <li>Business Connections</li>
             <li>Torah Learning</li>
             <li>Personal Development</li>
@@ -667,27 +661,26 @@
             <li>Shabbat in Jerusalem</li>
           </ul>
           <div class="foot-row">
-            <div class="price"><small>Program price</small>$499</div>
+            <div class="price"><span class="label">Program price</span>$499</div>
             <a class="btn apply-link" href="#apply">Apply</a>
           </div>
         </div>
       </article>
     </div>
-    <p class="combo reveal">Already in Israel? Join the Remote Work Study on its own. <b>Or do both</b> and go straight from the Yeshiva Experience into the Remote Work Study.</p>
+    <p class="combo">Already in Israel? Join the Remote Work Study on its own. <b>Or do both</b> and go straight from the Yeshiva Experience into the Remote Work Study.</p>
 
-    <div class="summer reveal">
+    <div class="summer">
       <div class="summer-head">
-        <div class="eyebrow">Summer 2027</div>
-        <h3>Coming this summer</h3>
+        <h3>Summer 2027</h3>
         <p>Dates to be announced. Want to hear first? <a href="mailto:avrahamkovel@gmail.com">Email Rabbi Avi</a>.</p>
       </div>
       <div class="summer-item">
-        <div class="tag">Yeshiva Experience</div>
+        <div class="label">Yeshiva Experience</div>
         <div class="len">2 weeks</div>
         <p>Starting late May / early June</p>
       </div>
       <div class="summer-item">
-        <div class="tag">Remote Work Study</div>
+        <div class="label">Remote Work Study</div>
         <div class="len">1 month+</div>
         <p>Right after the Yeshiva Experience</p>
       </div>
@@ -697,31 +690,30 @@
 
 <section class="cream" id="apply">
   <div class="wrap">
-    <div class="center reveal">
-      <div class="eyebrow">How to Apply</div>
-      <h2>Five simple <i>steps</i></h2>
+    <div class="section-head">
+      <h2>How to apply</h2>
     </div>
-        <div class="steps">
-      <div class="step reveal"><div class="n">Step 1</div><h3>Apply online</h3><p>Fill out a short application about yourself and what you're looking for.</p></div>
-      <div class="step reveal"><div class="n">Step 2</div><h3>Interview</h3><p>Talk with our team so we can get to know you and answer your questions.</p></div>
-      <div class="step reveal"><div class="n">Step 3</div><h3>Secure your spot</h3><p>Once accepted, a deposit confirms your place in the program.</p></div>
-      <div class="step reveal"><div class="n">Step 4</div><h3>Book your flights</h3><p>Coordinate your travel with us so you arrive in time for the start.</p></div>
-      <div class="step reveal"><div class="n">Step 5</div><h3>Arrive in Jerusalem</h3><p>Land, settle in, and start the program.</p></div>
+    <div class="steps">
+      <div class="step"><div class="label">Step 1</div><h3>Apply online</h3><p>Fill out a short application about yourself and what you're looking for.</p></div>
+      <div class="step"><div class="label">Step 2</div><h3>Interview</h3><p>Talk with our team so we can get to know you and answer your questions.</p></div>
+      <div class="step"><div class="label">Step 3</div><h3>Secure your spot</h3><p>Once accepted, a deposit confirms your place in the program.</p></div>
+      <div class="step"><div class="label">Step 4</div><h3>Book your flights</h3><p>Coordinate your travel with us so you arrive in time for the start.</p></div>
+      <div class="step"><div class="label">Step 5</div><h3>Arrive in Jerusalem</h3><p>Land, settle in, and start the program.</p></div>
     </div>
-    <div class="center reveal" style="margin-top: 52px;">
+    <div class="apply-cta">
       <a class="btn ink apply-link" href="#apply">Start Your Application</a>
+      <p>Questions first? <a href="mailto:avrahamkovel@gmail.com">Email Rabbi Avi</a>.</p>
     </div>
   </div>
 </section>
 
 <section id="faq">
   <div class="wrap faq-grid">
-    <div class="side reveal">
-      <div class="eyebrow">FAQ</div>
+    <div class="side">
       <h2>Questions</h2>
       <p>Have another question? Email Rabbi Avi Kovel at <a href="mailto:avrahamkovel@gmail.com">avrahamkovel@gmail.com</a>.</p>
     </div>
-    <div class="reveal">
+    <div>
       <details>
         <summary>Who is Aleph for?</summary>
         <div class="answer">Young men who want to spend real time learning and growing in Jerusalem, and who are looking for more than a typical Israel trip.</div>
@@ -756,8 +748,8 @@
 </section>
 
 <section class="closing">
-  <div class="wrap reveal">
-    <h2>Ready for <i>more?</i></h2>
+  <div class="wrap">
+    <h2>Ready for <span class="accent">more?</span></h2>
     <p>If you&rsquo;re ready to invest in a program that will shape the rest of your life, apply today.</p>
     <div class="ctas">
       <a class="btn apply-link" href="#apply">Apply Now</a>
@@ -824,20 +816,6 @@
     if (e.target.tagName === 'A') { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
   });
 
-  // Fade sections in as they scroll into view
-  (function () {
-    var els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      els.forEach(function (el) { el.classList.add('is-visible'); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function (el) { io.observe(el); });
-  })();
 </script>
 
 </body>
