@@ -1,0 +1,825 @@
+<!--
+  ALEPH: program website
+  Brand: deep navy, Aleph gold, warm cream (matches the print flyers and deck).
+  Headings: Cormorant Garamond. Body: Crimson Pro.
+  Photos live in ./images. logo-gold.png is the official horizontal lockup.
+  remote-work.jpg is an AI-generated illustration; swap in a real photo when you have one.
+  Items marked [EDIT] need real content before launch.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aleph | Yeshiva Program in Jerusalem</title>
+<meta name="description" content="Aleph is an immersive yeshiva program in Jerusalem for serious young men who want more than just another Israel trip.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-2: #101F38;
+    --navy-3: #14213D;
+    --navy-line: #2A3A57;
+    --gold: #C9A84C;
+    --gold-text: #8C6D2A;      /* gold for text on light backgrounds (contrast) */
+    --cream: #F5F0E8;
+    --cream-2: #FBF8F3;
+    --ink: #0A1628;
+    --ink-soft: #4A5568;
+    --ink-faint: #7A8290;
+    --on-dark: #F5F0E8;
+    --on-dark-soft: #CFC8BA;
+    --line: #E3DCCF;
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --body: "Crimson Pro", Georgia, "Times New Roman", serif;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body {
+    margin: 0; background: var(--cream-2); color: var(--ink);
+    font-family: var(--body); font-size: 19px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; margin: 0; line-height: 1.12; text-wrap: balance; }
+  p { margin: 0 0 16px; }
+  p:last-child { margin-bottom: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+  h2 { font-size: clamp(38px, 4.2vw, 54px); font-weight: 500; margin-bottom: 18px; }
+  h2 i { color: var(--gold-text); font-weight: 500; }
+  .dark h2 i, .hero h1 i, .closing h2 i { color: var(--gold); }
+  .eyebrow {
+    font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold-text); margin-bottom: 14px;
+  }
+  .dark .eyebrow { color: var(--gold); }
+  .intro { font-size: 20px; color: var(--ink-soft); max-width: 60ch; }
+  .dark .intro { color: var(--on-dark-soft); }
+  .center { text-align: center; }
+  .center .intro { margin-left: auto; margin-right: auto; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-block; font-family: var(--serif); font-size: 16px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+    padding: 14px 30px; border: 1px solid var(--gold); background: var(--gold); color: var(--navy);
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .btn:hover { background: transparent; color: var(--gold); }
+  .btn.ghost { background: transparent; color: var(--on-dark); border-color: rgba(245,240,232,.7); }
+  .btn.ghost:hover { background: var(--on-dark); color: var(--navy); border-color: var(--on-dark); }
+  .btn.ink { background: var(--navy); border-color: var(--navy); color: var(--on-dark); }
+  .btn.ink:hover { background: transparent; color: var(--navy); }
+
+  /* ---------- Nav ---------- */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,22,40,0.96); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--navy-line);
+  }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+  .brand { display: flex; align-items: center; text-decoration: none; }
+  .brand img { height: 38px; width: auto; }
+  .navlinks { display: flex; align-items: center; gap: 30px; }
+  .navlinks a:not(.btn) {
+    font-family: var(--serif); font-size: 17px; font-weight: 600; letter-spacing: 0.06em;
+    text-decoration: none; color: var(--on-dark-soft); transition: color .2s;
+  }
+  .navlinks a:not(.btn):hover { color: var(--gold); }
+  .navlinks .btn { padding: 9px 22px; font-size: 14px; }
+  .menu-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--on-dark); }
+  .menu-toggle svg { width: 26px; height: 26px; }
+
+  /* ---------- Hero ---------- */
+  header.hero { background: var(--navy); color: var(--on-dark); }
+  .hero-photo {
+    --hero-img: url("images/hero-kotel.jpg"); --hero-ar: 2.17;
+    position: relative; height: clamp(240px, 38vw, 560px); overflow: hidden; background: var(--navy);
+  }
+  .hero-photo .bg {
+    position: absolute; inset: -40px; background: var(--hero-img) center / cover no-repeat;
+    filter: blur(28px) brightness(.55) saturate(1.1);
+  }
+  .hero-photo .fg {
+    position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+    height: 100%; aspect-ratio: var(--hero-ar); min-width: 100%;
+    background: var(--hero-img) center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  }
+  @media (max-aspect-ratio: 1/1) { .hero-photo .fg { -webkit-mask-image: none; mask-image: none; } }
+  .hero-photo::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,22,40,.25) 0%, rgba(10,22,40,0) 18%, rgba(10,22,40,0) 70%, var(--navy) 100%);
+  }
+  .hero-body { position: relative; padding-top: 8px; padding-bottom: 92px; margin-top: -40px; }
+  .hero-inner { position: relative; max-width: 760px; }
+  .hero .logo { height: clamp(44px, 5vw, 64px); width: auto; margin-bottom: 26px; }
+  .hero h1 { font-size: clamp(54px, 7.6vw, 104px); font-weight: 500; line-height: 1; letter-spacing: -0.01em; }
+  .hero p.sub { font-size: clamp(21px, 2.2vw, 27px); line-height: 1.4; max-width: 34ch; margin: 22px 0 34px; color: #EDE6D8; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; grid-template-areas: "top video" "bottom video"; column-gap: clamp(32px, 4vw, 60px); row-gap: 0; align-items: center; }
+  .hero-top { grid-area: top; align-self: end; }
+  .hero-bottom { grid-area: bottom; align-self: start; }
+  .hero-grid .video { grid-area: video; }
+  .hero-top .sub { margin-bottom: 30px !important; }
+  .hero-grid .hero-inner { max-width: none; }
+  .hero-grid h1 { font-size: clamp(48px, 5.4vw, 80px); }
+  .video {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000 center / cover no-repeat;
+    border: 1px solid rgba(201,168,76,.55); box-shadow: 0 24px 60px rgba(0,0,0,.45), 10px 10px 0 var(--gold);
+    cursor: pointer; overflow: hidden; display: block; padding: 0; color: inherit;
+  }
+  .video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+  .video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,22,40,.05), rgba(10,22,40,.45)); }
+  .video:hover img { transform: scale(1.03); }
+  .video .play {
+    position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 92px; height: 92px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4); transition: transform .2s ease, background .2s ease;
+  }
+  .video:hover .play { transform: translate(-50%, -50%) scale(1.08); background: #D9BB63; }
+  .video .play svg { width: 34px; height: 34px; margin-left: 6px; }
+  .video .label {
+    position: absolute; z-index: 2; left: 22px; bottom: 18px; font-family: var(--serif); font-weight: 700;
+    font-size: 15px; letter-spacing: .24em; text-transform: uppercase; color: var(--on-dark);
+  }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero .dates {
+    margin-top: 40px; display: flex; gap: 14px 34px; flex-wrap: wrap;
+    font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: 0.08em; color: var(--on-dark);
+  }
+  .hero .dates span b { color: var(--gold); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; font-size: 14px; margin-right: 10px; }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(76px, 9vw, 120px) 0; }
+  section.cream { background: var(--cream); }
+  section.dark { background: var(--navy); color: var(--on-dark); }
+  section.dark-2 { background: var(--navy-3); color: var(--on-dark); }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 88px); align-items: center; }
+  .about-grid p { color: var(--ink-soft); }
+  .about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .about-photos img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
+  .about-photos img:first-child { margin-top: 40px; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 64px; border-top: 1px solid var(--line); }
+  .stat { padding: 30px 28px 0; border-left: 1px solid var(--line); }
+  .stat:first-child { border-left: 0; padding-left: 0; }
+  .stat .num { font-family: var(--serif); font-size: clamp(54px, 6vw, 76px); font-weight: 500; line-height: 1; color: var(--navy); }
+  .stat .num small { font-size: .5em; color: var(--gold-text); }
+  .stat p { margin-top: 10px; font-size: 18px; color: var(--ink-soft); }
+  .stats-note { margin-top: 22px; font-size: 16px; color: var(--ink-faint); font-style: italic; }
+
+  /* Pillars */
+  .section-head { max-width: 700px; margin: 0 auto 48px; }
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .pillar { background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .pillar img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .pillar .body { padding: 22px 22px 26px; border-top: 3px solid var(--gold); }
+  .pillar h3 { font-size: 30px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+  .pillar h3 small { font-family: var(--body); font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--ink-faint); font-weight: 400; font-style: italic; margin-left: 6px; }
+  .pillar p { font-size: 17.5px; color: var(--ink-soft); }
+  .pillar .list { margin-top: 12px; font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--gold-text); line-height: 1.45; }
+
+  /* Testimonials */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  .quote { background: var(--navy-2); border: 1px solid var(--navy-line); padding: 32px 30px 30px; display: flex; flex-direction: column; }
+  .quote img { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin-bottom: 22px; }
+  .quote blockquote { margin: 0 0 22px; font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1.32; color: var(--on-dark); flex: 1; }
+  .who { font-size: 17px; color: var(--on-dark-soft); line-height: 1.4; }
+  .who b { display: block; color: var(--on-dark); font-weight: 600; font-size: 18.5px; }
+  .rabbi-head { margin-top: 72px; }
+  .rabbis { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+  .rabbi { display: grid; grid-template-columns: 120px 1fr; gap: 26px; align-items: start; border-top: 1px solid var(--navy-line); padding-top: 30px; }
+  .rabbi img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+  .rabbi blockquote { margin: 0 0 18px; font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.38; color: var(--on-dark); }
+  .rabbi blockquote p { margin-bottom: 12px; }
+
+  /* Curriculum */
+  .curriculum-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; margin-top: 48px; }
+  .course { padding: 24px 0; border-top: 1px solid var(--line); }
+  .course:first-child { border-top: 0; padding-top: 0; }
+  .course h3 { font-size: 28px; margin-bottom: 6px; }
+  .course h3 span { font-family: var(--body); font-weight: 400; font-style: italic; font-size: 17px; color: var(--ink-faint); margin-left: 6px; }
+  .course p { color: var(--ink-soft); }
+  .topics { margin-top: 10px; font-size: 17px; color: var(--ink-soft); }
+  .topics b { color: var(--ink); font-weight: 600; }
+  .schedule { background: var(--navy); color: var(--on-dark); padding: 34px 32px; position: sticky; top: 100px; }
+  .schedule h3 { font-size: 28px; margin-bottom: 16px; }
+  .schedule table { width: 100%; border-collapse: collapse; }
+  .schedule td { padding: 10px 0; border-top: 1px solid var(--navy-line); font-size: 17.5px; vertical-align: top; }
+  .schedule td.t { width: 66px; color: var(--gold); font-variant-numeric: tabular-nums; font-weight: 600; font-size: 16px; padding-top: 11px; }
+  .schedule td i { color: var(--on-dark-soft); font-size: 16px; }
+
+  /* Speakers */
+  .speakers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 44px; }
+  .speaker-group h3 { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .speaker-group ul { list-style: none; padding: 0; margin: 0; }
+  .speaker-group li { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.35; padding: 4px 0; }
+
+  /* Programs */
+  .programs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+  .prog { background: var(--navy-2); border: 1px solid var(--navy-line); display: flex; flex-direction: column; }
+  .prog > img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .prog .body { padding: 34px 34px 36px; display: flex; flex-direction: column; flex: 1; border-top: 3px solid var(--gold); }
+  .prog .tag { font-family: var(--serif); font-weight: 700; font-size: 14px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); }
+  .prog h3 { font-size: clamp(34px, 3.4vw, 44px); font-weight: 500; margin: 8px 0 6px; }
+  .prog .when { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--gold); margin-bottom: 16px; }
+  .prog p { color: var(--on-dark-soft); }
+  .prog ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
+  .prog li { font-family: var(--serif); font-size: 18.5px; font-weight: 600; padding-left: 16px; position: relative; line-height: 1.35; }
+  .prog li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+  .prog .foot-row { margin-top: auto; padding-top: 30px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .price { font-family: var(--serif); font-size: 64px; font-weight: 500; line-height: 1; }
+  .price small { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .combo { margin-top: 36px; text-align: center; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--on-dark-soft); }
+  .combo b { color: var(--gold); font-style: normal; font-weight: 600; }
+
+  .summer { margin-top: 56px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; border: 1px solid var(--navy-line); background: var(--navy-2); }
+  .summer > div { padding: 30px 32px; }
+  .summer-item { border-left: 1px solid var(--navy-line); }
+  .summer h3 { font-size: 34px; font-weight: 500; margin: 2px 0 8px; }
+  .summer p { color: var(--on-dark-soft); font-size: 18px; margin: 0; }
+  .summer a { color: var(--gold); }
+  .summer .tag { font-family: var(--serif); font-weight: 700; font-size: 14px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
+  .summer .len { font-family: var(--serif); font-size: 40px; font-weight: 500; line-height: 1.1; margin: 6px 0 6px; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; margin-top: 48px; }
+  .step { border-top: 2px solid var(--gold); padding-top: 20px; }
+  .step .n { font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 6px; }
+  .step h3 { font-size: 27px; margin-bottom: 8px; }
+  .step p { font-size: 17.5px; color: var(--ink-soft); }
+
+  /* FAQ */
+  .faq-grid { display: grid; grid-template-columns: 1fr 1.7fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+  .faq-grid .side p { color: var(--ink-soft); }
+  .faq-grid .side a { color: var(--gold-text); }
+  details { border-top: 1px solid var(--line); }
+  details:last-child { border-bottom: 1px solid var(--line); }
+  summary {
+    list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative;
+    font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.3;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    font-family: var(--body); font-weight: 400; font-size: 28px; color: var(--gold-text); transition: transform .2s;
+  }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  details .answer { padding: 0 40px 22px 0; color: var(--ink-soft); }
+  details .answer a { color: var(--gold-text); }
+
+  /* Closing banner */
+  .closing {
+    text-align: center; color: var(--on-dark);
+    background:
+      linear-gradient(rgba(10,22,40,.74), rgba(10,22,40,.82)),
+      url("images/kotel.jpg") center 60% / cover no-repeat;
+    background-color: var(--navy);
+  }
+  .closing h2 { max-width: 22ch; margin: 0 auto 18px; }
+  .closing p { color: #E6DFD0; max-width: 50ch; margin: 0 auto 34px; }
+  .closing .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .closing .contact { margin-top: 44px; font-size: 18px; color: var(--on-dark-soft); }
+  .closing .contact a { color: var(--on-dark); text-decoration: none; font-weight: 600; }
+  .closing .contact a:hover { text-decoration: underline; }
+
+  /* Footer */
+  footer { background: var(--navy); color: var(--on-dark-soft); border-top: 1px solid var(--navy-line); padding: 44px 0 32px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .foot .brand img { height: 34px; }
+  .foot nav { display: flex; gap: 26px; flex-wrap: wrap; }
+  .foot nav a { font-family: var(--serif); font-size: 17px; font-weight: 600; text-decoration: none; color: var(--on-dark-soft); }
+  .foot nav a:hover { color: var(--gold); }
+  .copyright { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--navy-line); font-size: 15px; color: #9AA3B5; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  /* Fade in on scroll */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .about-grid > *, .curriculum-grid > *, .faq-grid > *, .programs > *, .quotes > *, .rabbis > *,
+  .pillars > *, .speakers > *, .steps > *, .stats > *, .about-photos > * { min-width: 0; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1020px) {
+    .hero-grid { grid-template-columns: 1fr; grid-template-areas: "top" "video" "bottom"; }
+    .hero-grid .video { margin: 0 0 36px; }
+    .hero-body { padding-bottom: 64px !important; }
+    .pillars, .speakers { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
+    .steps { grid-template-columns: repeat(3, 1fr); gap: 40px 24px; }
+    .quotes { grid-template-columns: 1fr; }
+    .rabbis, .programs { grid-template-columns: 1fr; }
+    .summer { grid-template-columns: 1fr 1fr; }
+    .summer-head { grid-column: 1 / -1; border-bottom: 1px solid var(--navy-line); }
+    .summer-item:nth-child(2) { border-left: 0; }
+    .curriculum-grid { grid-template-columns: 1fr; }
+    .schedule { position: static; }
+  }
+  @media (max-width: 860px) {
+    .menu-toggle { display: block; }
+    .navlinks {
+      display: none; position: absolute; top: 72px; left: 0; right: 0;
+      flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 32px 28px;
+      background: var(--navy); border-bottom: 1px solid var(--navy-line);
+    }
+    .navlinks.open { display: flex; }
+    .navlinks a:not(.btn) { padding: 14px 0; width: 100%; border-bottom: 1px solid var(--navy-line); }
+    .navlinks .btn { margin-top: 20px; }
+    .about-grid, .faq-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-left: 0; padding-left: 0; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    .hero-body { margin-top: -20px; padding-bottom: 72px; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    .navlinks { padding: 8px 16px 24px; }
+    .pillars, .speakers, .steps { grid-template-columns: 1fr; }
+    .summer { grid-template-columns: 1fr; }
+    .summer-item { border-left: 0; border-top: 1px solid var(--navy-line); }
+    .prog ul { grid-template-columns: 1fr; }
+    .prog .body, .quote { padding: 26px 22px; }
+    .rabbi { grid-template-columns: 1fr; }
+    .schedule { padding: 24px 18px; }
+    .about-photos img:first-child { margin-top: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Aleph home">
+      <img src="images/logo-gold.png" alt="Aleph" width="140" height="38">
+    </a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#program">Program</a>
+      <a href="#voices">Testimonials</a>
+      <a href="#curriculum">Curriculum</a>
+      <a href="#dates">Dates</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn apply-link" href="#apply">Apply</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-photo" role="img" aria-label="Aleph students and rabbis standing together at the Kotel"><div class="bg"></div><div class="fg"></div></div>
+  <div class="wrap hero-body hero-grid">
+    <div class="hero-inner hero-top">
+      <img class="logo" src="images/logo-gold.png" alt="Aleph" width="280" height="76">
+      <h1>Real Depth. <i>Real Learning.</i></h1>
+      <p class="sub">An immersive Yeshiva experience in Jerusalem for serious young men who want more than just another trip.</p>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-ctas">
+        <a class="btn apply-link" href="#apply">Apply</a>
+        <a class="btn ghost" href="#dates">See Programs</a>
+      </div>
+      <div class="dates">
+        <span><b>Yeshiva Experience</b>Dec 20 &ndash; Jan 3</span>
+        <span><b>Remote Work Study</b>Jan 4 &ndash; 31</span>
+      </div>
+    </div>
+    <button class="video" data-yt="z_UpjfKyyrE" aria-label="Play the Aleph video">
+      <img src="images/video-cover.jpg" alt="" loading="eager" style="object-position: center top;">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#0A1628"><path d="M6 4l15 8-15 8z"/></svg></span>
+      <span class="label">Watch the video</span>
+    </button>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="eyebrow">About Aleph</div>
+        <h2>More than <i>another trip</i></h2>
+        <p>Aleph brings young men to Jerusalem for a few focused weeks of Torah learning, personal growth, and travel around Israel.</p>
+        <p>Mornings are spent learning Gemara in small groups, followed by Ta&rsquo;amei HaMitzvos, the meaning behind the mitzvos. Afternoons bring Chumash with Rashi, workshops on career, relationships, and purpose, time with rabbis and mentors, and trips, hikes, and sports.</p>
+      </div>
+      <div class="about-photos reveal">
+        <img src="images/study.jpg" alt="A student in glasses listening closely during a class" style="object-position: center 35%;">
+        <img src="images/water.jpg" alt="The group having fun together at the Kineret">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cream" id="program">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">The Program</div>
+      <h2>Four Pillars. <i>One Experience.</i></h2>
+    </div>
+    <div class="pillars">
+      <article class="pillar reveal">
+        <img src="images/classroom.jpg" alt="Students learning together around a table with a rabbi at the whiteboard" style="object-position: center 40%;">
+        <div class="body">
+          <h3>Learn</h3>
+          <p>Gemara, Chumash, and text skills that last a lifetime.</p>
+          <div class="list">Talmud · Chumash · Jewish Law · Prayer</div>
+        </div>
+      </article>
+      <article class="pillar reveal">
+        <img src="images/kotel.jpg" alt="Students learning together in a circle at the Kotel at night" style="object-position: center 60%;">
+        <div class="body">
+          <h3>Grow</h3>
+          <p>Real mentorship and honest conversations that shape character.</p>
+          <div class="list">Mussar · Mentorship · Self-Awareness · Purpose</div>
+        </div>
+      </article>
+      <article class="pillar reveal">
+        <img src="images/hike.jpg" alt="Students standing together on a mountain overlook above the Judean hills" style="object-position: center 55%;">
+        <div class="body">
+          <h3>Explore</h3>
+          <p>Travel, history, and adventure throughout the Holy Land.</p>
+          <div class="list">Jerusalem · Kotel · Kineret · Yeshivas</div>
+        </div>
+      </article>
+      <article class="pillar reveal">
+        <img src="images/climb.jpg" alt="Students climbing at an indoor rock wall">
+        <div class="body">
+          <h3>Train <small>optional</small></h3>
+          <p>Climb, hike, play, and challenge your body alongside your mind.</p>
+          <div class="list">Climbing · Hiking · Fitness · Sports</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="voices">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="eyebrow">In Their Words</div>
+      <h2>What our students <i>say</i></h2>
+    </div>
+    <div class="quotes">
+      <figure class="quote reveal" style="margin:0">
+        <img src="images/t-chris.jpg" alt="Chris Stockwell with a rabbi">
+        <blockquote>&ldquo;When I boarded the plane back to the States, I was leaving Israel with real emunah. It was on this trip that I started actually believing in Hashem and praying to Him with my whole heart.&rdquo;</blockquote>
+        <figcaption class="who"><b>Chris Stockwell</b>Founder of Scout Travel Inc</figcaption>
+      </figure>
+      <figure class="quote reveal" style="margin:0">
+        <img src="images/t-jordan.jpg" alt="Jordan Berger">
+        <blockquote>&ldquo;Aleph fundamentally redefined my understanding of what it means to be Jewish.&rdquo;</blockquote>
+        <figcaption class="who"><b>Jordan Berger</b>Cornell Grad &amp; Managing Partner at Sundara Partners</figcaption>
+      </figure>
+      <figure class="quote reveal" style="margin:0">
+        <img src="images/t-mitch.jpg" alt="Mitch Rosenthal">
+        <blockquote>&ldquo;Everyone loved being part of Aleph. Rabbi Avi and Rabbi Jimmy created an awesome group dynamic and allowed us to learn in a comfortable and challenging way.&rdquo;</blockquote>
+        <figcaption class="who"><b>Mitch Rosenthal</b>Senior at Columbia University</figcaption>
+      </figure>
+    </div>
+
+    <div class="rabbi-head reveal">
+      <div class="eyebrow">From the Rabbis</div>
+    </div>
+    <div class="rabbis">
+      <figure class="rabbi reveal" style="margin:0">
+        <img src="images/t-horwitz.jpg" alt="Rabbi Zach Horwitz">
+        <div>
+          <blockquote>
+            <p>&ldquo;Through Rabbi Avi and Rabbi Jimmy&rsquo;s unbelievable guidance, they meet the students at their level and elevate to them to higher learning and shmiras hamitzvos.&rdquo;</p>
+          </blockquote>
+          <figcaption class="who"><b>Rabbi Zach Horwitz</b>Meor Columbia</figcaption>
+        </div>
+      </figure>
+      <figure class="rabbi reveal" style="margin:0">
+        <img src="images/t-wallach.jpg" alt="Rabbi Kenny Wallach">
+        <div>
+          <blockquote><p>&ldquo;Aleph offered an amazing diversity of thought provoking educational experiences and creative personal growth activities. The experience lasted with my students far beyond the length of the program. I would recommend this to any mkarev who has students who are ready and willing to transition into a more engaged relationship with their Judaism.&rdquo;</p></blockquote>
+          <figcaption class="who"><b>Rabbi Kenny Wallach</b>Olami Manhattan</figcaption>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="curriculum">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Curriculum</div>
+      <h2>What you&rsquo;ll <i>learn</i></h2>
+    </div>
+    <div class="curriculum-grid">
+      <div>
+        <div class="course reveal">
+          <h3>Gemara Learning</h3>
+          <p>Practical, guided skill-building that teaches you to follow the structure and flow of the Talmud. Small groups keep every session personal and give you room to participate and own the material.</p>
+        </div>
+        <div class="course reveal">
+          <h3>Studies in Bereishis</h3>
+          <p>Learn to read Genesis the way the great commentators did, using a four-step method that builds real text skills and gives practical lessons for how to live.</p>
+        </div>
+        <div class="course reveal">
+          <h3>The Jewish Perspective <span>with Rabbi Gershenfeld</span></h3>
+          <p>A weekly class that takes ideas you thought you already understood and looks at them in a new way, giving you a bigger picture of what your life can be and what Judaism asks of you.</p>
+        </div>
+        <div class="course reveal">
+          <h3>Jewish Law &amp; Its Meaning</h3>
+          <p>Learn the practical halachos, and the reasons behind why we do what we do.</p>
+          <p class="topics"><b>Topics include:</b> Tzitzis · Tefillin · Tzedakah · Shabbos · Kiddush · Blessings · Torah Study · Holidays</p>
+        </div>
+        <div class="course reveal">
+          <h3>Personal Growth &amp; Reflection</h3>
+          <p>Study of classic works on character and self-improvement, along with daily reflection in a personal journal you receive at the start of the program.</p>
+        </div>
+        <div class="course reveal">
+          <h3>Guest Speakers &amp; Evening Q&amp;A</h3>
+          <p>Speakers on Jewish philosophy, self-development, and business join for talks and open Q&amp;A.</p>
+        </div>
+      </div>
+      <aside class="schedule reveal" aria-label="Sample daily schedule">
+        <h3>Sample Daily Schedule</h3>
+        <table>
+          <tr><td class="t">8:45</td><td>Beginner Tefilla Class</td></tr>
+          <tr><td class="t">9:00</td><td>Tefilla <i>(Optional)</i></td></tr>
+          <tr><td class="t">9:30</td><td>Breakfast</td></tr>
+          <tr><td class="t">10:00</td><td>Gemara</td></tr>
+          <tr><td class="t">12:00</td><td>Ta'amei HaMitzvos / Halacha</td></tr>
+          <tr><td class="t">1:00</td><td>Lunch &amp; Mincha <i>(Optional)</i></td></tr>
+          <tr><td class="t">2:30</td><td>Chumash with Rashi</td></tr>
+          <tr><td class="t">3:45</td><td>Mussar / Personal Reflection</td></tr>
+          <tr><td class="t">4:45</td><td>Physical Activity / Free Time</td></tr>
+          <tr><td class="t">6:30</td><td>Dinner with a Business Mentor</td></tr>
+          <tr><td class="t">8:00</td><td>Night Activities / Free Time</td></tr>
+        </table>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="cream" id="speakers">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Guest Speakers</div>
+      <h2>Learn from <i>the best</i></h2>
+      <p class="intro">Recent speakers include:</p>
+    </div>
+    <div class="speakers">
+      <div class="speaker-group reveal">
+        <h3>Jewish Philosophy</h3>
+        <ul><li>Rabbi Yitzchok Berkovits</li><li>Rabbi Yaakov Marcus</li><li>Rabbi Akiva Tatz</li><li>Rabbi MZ Dubov</li></ul>
+      </div>
+      <div class="speaker-group reveal">
+        <h3>Self Development</h3>
+        <ul><li>Rabbi Dr. Yosef Lynn</li><li>Rabbi Yehoshua Styne</li><li>Rabbi AY Jacobs</li></ul>
+      </div>
+      <div class="speaker-group reveal">
+        <h3>Business Leadership</h3>
+        <ul><li>Tom Steinberg</li><li>Charles Maslin</li><li>Ari Wasserman</li></ul>
+      </div>
+      <div class="speaker-group reveal">
+        <h3>Gemara in Depth</h3>
+        <ul><li>Rabbi Immanuel Bernstein</li><li>Rabbi Yosef Hershman</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="dates">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="eyebrow">Winter 2026&ndash;27</div>
+      <h2>Two programs. <i>One Jerusalem.</i></h2>
+      <p class="intro">Space in each program is limited. Applications are reviewed on a rolling basis.</p>
+    </div>
+
+    <div class="programs">
+      <article class="prog reveal">
+        <img src="images/classroom.jpg" alt="Students learning together around a table in Jerusalem" style="object-position: center 40%;">
+        <div class="body">
+          <div class="tag">Program One</div>
+          <h3>Yeshiva Experience</h3>
+          <div class="when">December 20 &ndash; January 3</div>
+          <p>Two immersive weeks of real learning, mentorship, and adventure in Jerusalem.</p>
+          <ul>
+            <li>Gemara &amp; Chumash</li>
+            <li>Jewish Law &amp; Prayer</li>
+            <li>Mussar &amp; Mentorship</li>
+            <li>Kotel &amp; Kineret</li>
+            <li>Guest Speakers</li>
+            <li>Fitness <span style="font-weight:400;font-style:italic">(optional)</span></li>
+          </ul>
+          <div class="foot-row">
+            <div class="price"><small>Program price</small>$299</div>
+            <a class="btn apply-link" href="#apply">Apply</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="prog reveal">
+        <img src="images/remote-work.jpg" alt="A student studying Gemara at a laptop by a window overlooking Jerusalem at sunset" style="object-position: 20% center;">
+        <div class="body">
+          <div class="tag">Program Two</div>
+          <h3>Remote Work Study</h3>
+          <div class="when">January 4 &ndash; 31 &middot; Up to 4 weeks</div>
+          <p>Learn Deeply. Build Boldly. Work remotely from Jerusalem while you grow in your Judaism.</p>
+          <ul>
+            <li>Subsidized Living</li>
+            <li>Co-Working Space</li>
+            <li>World-Class Mentors</li>
+            <li>Business Connections</li>
+            <li>Torah Learning</li>
+            <li>Personal Development</li>
+            <li>Fitness Training</li>
+            <li>Travel Israel</li>
+            <li>Shabbat in Jerusalem</li>
+          </ul>
+          <div class="foot-row">
+            <div class="price"><small>Program price</small>$499</div>
+            <a class="btn apply-link" href="#apply">Apply</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="combo reveal">Already in Israel? Join the Remote Work Study on its own. <b>Or do both</b> and go straight from the Yeshiva Experience into the Remote Work Study.</p>
+
+    <div class="summer reveal">
+      <div class="summer-head">
+        <div class="eyebrow">Summer 2027</div>
+        <h3>Coming this summer</h3>
+        <p>Dates to be announced. Want to hear first? <a href="mailto:avrahamkovel@gmail.com">Email Rabbi Avi</a>.</p>
+      </div>
+      <div class="summer-item">
+        <div class="tag">Yeshiva Experience</div>
+        <div class="len">2 weeks</div>
+        <p>Starting late May / early June</p>
+      </div>
+      <div class="summer-item">
+        <div class="tag">Remote Work Study</div>
+        <div class="len">1 month+</div>
+        <p>Right after the Yeshiva Experience</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cream" id="apply">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="eyebrow">How to Apply</div>
+      <h2>Five simple <i>steps</i></h2>
+    </div>
+        <div class="steps">
+      <div class="step reveal"><div class="n">Step 1</div><h3>Apply online</h3><p>Fill out a short application about yourself and what you're looking for.</p></div>
+      <div class="step reveal"><div class="n">Step 2</div><h3>Interview</h3><p>Talk with our team so we can get to know you and answer your questions.</p></div>
+      <div class="step reveal"><div class="n">Step 3</div><h3>Secure your spot</h3><p>Once accepted, a deposit confirms your place in the program.</p></div>
+      <div class="step reveal"><div class="n">Step 4</div><h3>Book your flights</h3><p>Coordinate your travel with us so you arrive in time for the start.</p></div>
+      <div class="step reveal"><div class="n">Step 5</div><h3>Arrive in Jerusalem</h3><p>Land, settle in, and start the program.</p></div>
+    </div>
+    <div class="center reveal" style="margin-top: 52px;">
+      <a class="btn ink apply-link" href="#apply">Start Your Application</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq-grid">
+    <div class="side reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2>Questions</h2>
+      <p>Have another question? Email Rabbi Avi Kovel at <a href="mailto:avrahamkovel@gmail.com">avrahamkovel@gmail.com</a>.</p>
+    </div>
+    <div class="reveal">
+      <details>
+        <summary>Who is Aleph for?</summary>
+        <div class="answer">Young men who want to spend real time learning and growing in Jerusalem, and who are looking for more than a typical Israel trip.</div>
+      </details>
+      <details>
+        <summary>Do I need a background in Jewish learning?</summary>
+        <div class="answer">No. Every class, including Gemara, starts from the basics. Learning is in small groups, so beginners and more experienced students each learn at their own level.</div>
+      </details>
+      <details>
+        <summary>Where does the program take place?</summary>
+        <div class="answer">Aleph is based in Jerusalem, with trips and hikes around Israel.</div>
+      </details>
+      <details>
+        <summary>What does a typical day look like?</summary>
+        <div class="answer">Mornings are for prayer, Gemara, and Ta&rsquo;amei HaMitzvos. Afternoons cover Chumash with Rashi and Mussar / personal reflection, followed by sports or free time, dinner with a business mentor, and evening activities. See the <a href="#curriculum">sample schedule</a>.</div>
+      </details>
+      <details>
+        <summary>Do I have to do the fitness activities?</summary>
+        <div class="answer">No. Climbing, hiking, fitness, and sports are all optional.</div>
+      </details>
+      <details>
+        <summary>What is the Remote Work Study?</summary>
+        <div class="answer">A program from January 4 to 31 (up to 4 weeks) for young professionals who want to keep working while they learn. You get subsidized living and a co-working space in Jerusalem, business mentors and connections, plus Torah learning, personal development, fitness, travel, and Shabbat in Jerusalem. You can join it on its own if you&rsquo;re already in Israel, or continue straight into it after the Yeshiva Experience.</div>
+      </details>
+      <details>
+        <summary>How much does it cost?</summary>
+        <!-- [EDIT] Add scholarship / financial-assistance details if relevant. -->
+        <div class="answer">The Yeshiva Experience is $299 and the Remote Work Study is $499. Get in touch for information about financial assistance.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap reveal">
+    <h2>Ready for <i>more?</i></h2>
+    <p>If you&rsquo;re ready to invest in a program that will shape the rest of your life, apply today.</p>
+    <div class="ctas">
+      <a class="btn apply-link" href="#apply">Apply Now</a>
+      <a class="btn ghost" href="mailto:avrahamkovel@gmail.com">Contact Us</a>
+    </div>
+    <p class="contact">Questions? Contact Rabbi Avi Kovel at <a href="mailto:avrahamkovel@gmail.com">avrahamkovel@gmail.com</a> or <a href="tel:+972585997060">+972&nbsp;58&nbsp;599&nbsp;7060</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top" aria-label="Aleph home">
+        <img src="images/logo-gold.png" alt="Aleph" width="125" height="34">
+      </a>
+      <nav aria-label="Footer">
+        <a href="#about">About</a>
+        <a href="#program">Program</a>
+        <a href="#voices">Testimonials</a>
+        <a href="#curriculum">Curriculum</a>
+        <a href="#dates">Dates</a>
+        <a href="#faq">FAQ</a>
+        <a class="apply-link" href="#apply">Apply</a>
+      </nav>
+    </div>
+    <div class="copyright">
+      <span>&copy; <span id="yr">2026</span> Aleph · Jerusalem, Israel</span>
+      <a href="mailto:avrahamkovel@gmail.com" style="text-decoration: none;">avrahamkovel@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Application form URL. Every "Apply" button opens it in a new tab.
+  // While empty, every "Apply" button scrolls to the How to Apply section.
+  var APPLY_URL = 'https://forms.gle/NFYhvbsHQXUxLLTcA';
+  if (APPLY_URL) {
+    document.querySelectorAll('.apply-link').forEach(function (a) {
+      a.href = APPLY_URL; a.target = '_blank'; a.rel = 'noopener';
+    });
+  }
+
+  // Click-to-play YouTube video (loads the player only when clicked)
+  document.querySelectorAll('.video[data-yt]').forEach(function (v) {
+    v.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + v.dataset.yt + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title = 'Aleph video';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true;
+      v.innerHTML = ''; v.appendChild(f); v.style.cursor = 'default';
+    }, { once: true });
+  });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  var toggle = document.querySelector('.menu-toggle');
+  var links = document.getElementById('navlinks');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // Fade sections in as they scroll into view
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
